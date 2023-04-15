@@ -1,0 +1,28 @@
+table tr:hover {
+    background: #ddd;
+}
+
+/* td {
+    position: relative;
+    padding: 5px 10px;
+}
+
+tr.markout td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 1px solid #111;
+    width: 100%;
+} */
+
+table tr td.checked {
+    background: dark-grey;
+    color: darkgray;
+    text-decoration: line-through;
+    
+}
+
+.autofill-task {
+    display: none;
+}

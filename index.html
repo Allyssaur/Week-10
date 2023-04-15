@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DND - Chores Edition</title>
+    <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"> -->
+       <!-- I can't seem to get gitHub to accept my package and node_modules; it seems to ignore them everytime I upload them, 
+        so I have to link the bootstrap and jquery in this way again this week.  Everything I originally did was exactly the way the 
+        PromineoTech videos advised, and works locally but will not work once uploaded to gitHub. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <!-- bootstrap and jquery links provided via the getbootstrap.com/docs -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title display-4">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Rules</a>
+                </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <ul>
+                        <li>
+                            Roll a D6 to determine how many chores will be completed for the day.  If a die falls on the floor, re-roll.
+                        </li>
+                        <li>
+                            Once chore number is determined, roll a D20 to determine what chores to complete.
+                        </li>
+                        <li>
+                            If task is blue it is a temporarily priortized task.  Once complete, roll a D20 to assign a replacement task from the "Replacement Tasks" List.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title display-4">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Create Task</a>
+                  </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="container">
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label for="new-task">Task:</label>
+                                            <input type="text" class="form-control" id="new-task" placeholder="Task">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="form-group">
+                                            <label for="new-start-date">Roll Date:</label>
+                                            <input type="date" class="form-control" id="new-start-date">
+                                        </div>
+                                    </div>
+                                        <div class="form-range">
+                                            <label for="customRange2" class="form-header">Difficulty:</label>
+                                            <br>
+                                            <label for="customRange0" class="form-label">Easy</label>
+                                            <input type="range" class="form-range" min="0" max="5" id="customRange0">
+                                            <label for="customRange0" class="form-label">Hard</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button id="add" class="btn btn-primary click">Create</button>
+                            </div>
+                            <!-- <div>
+                                <button id="autofill" class="btn btn-primary from-control">AutoFill</button>
+                            </div> -->
+                        </div>
+                    </div>
+                  </div>
+            </div>
+                
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title display-4">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Task List</a>
+                  </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                    <table id="list" class="table table-dark table-striped">
+                        <tr class="row-header">
+                            <th>Number Rolled</th>
+                            <th>Task</th>
+                            <th>Date Assigned</th>
+                            <th>Difficulty</th>
+                        </tr>
+                        <tr class="taskRow" id="task-1"></tr>
+                        <tr class="taskRow" id="task-2"></tr>
+                        <tr class="taskRow" id="task-3"></tr>
+                        <tr class="taskRow" id="task-4"></tr>
+                        <tr class="taskRow" id="task-5"></tr>
+                        <tr class="taskRow" id="task-6"></tr>
+                        <tr class="taskRow" id="task-7"></tr>
+                        <tr class="taskRow" id="task-8"></tr>
+                        <tr class="taskRow" id="task-9"></tr>
+                        <tr class="taskRow" id="task-10"></tr>
+                        <tr class="taskRow" id="task-11"></tr>
+                        <tr class="taskRow" id="task-12"></tr>
+                        <tr class="taskRow" id="task-13"></tr>
+                        <tr class="taskRow" id="task-14"></tr>
+                        <tr class="taskRow" id="task-15"></tr>
+                        <tr class="taskRow" id="task-16"></tr>
+                        <tr class="taskRow" id="task-17"></tr>
+                        <tr class="taskRow" id="task-18"></tr>
+                        <tr class="taskRow" id="task-19"></tr>
+                        <tr class="taskRow" id="task-20"></tr>
+                        <!-- <tr id="0">
+                            <td>1</td>
+                            <td><b>CRITICAL FAIL!</b>  Do All Tasks Then Re-roll D6 And Add Result To Task Count!</td>
+                            <td>N/A</td>
+                            <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        </tr> -->
+                        <!-- <tr id="autofill-task">
+                            <td>2</td>
+                            <td>Take Out The Trash</td>
+                            <td>Autofilled</td>
+                            <td>1</td>
+                        </tr> -->
+                        <!-- <tr class="autofill-task">
+                            <td>3</td>
+                            <td>Clean Guest Bathroom</td>
+                            <td>Autofilled</td>
+                            <td>3</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>4</td>
+                            <td>Wash Pet Bowls</td>
+                            <td>Autofilled</td>
+                            <td>2</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>5</td>
+                            <td>Sweep/Mop Kitchen</td>
+                            <td>Autofilled</td>
+                            <td>2</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>6</td>
+                            <td>Organize Closet</td>
+                            <td>Autofilled</td>
+                            <td>4</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>7</td>
+                            <td>Do A Laundry Rotation</td>
+                            <td>Autofilled</td>
+                            <td>2</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>8</td>
+                            <td>Organize Cool Side Of Fridge</td>
+                            <td>Autofilled</td>
+                            <td>4</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>9</td>
+                            <td>Organize Bedroom Bathroom</td>
+                            <td>Autofilled</td>
+                            <td>3</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>10</td>
+                            <td>Deep Clean Shower</td>
+                            <td>Autofilled</td>
+                            <td>5</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>11</td>
+                            <td>Do ALL Dishes</td>
+                            <td>Autofilled</td>
+                            <td>3</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>12</td>
+                            <td>Vacuum/Dust Living Area</td>
+                            <td>Autofilled</td>
+                            <td>2</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="showAlways" id="item-12">
+                            <td>13</td>
+                            <td><b>SIDE QUEST!</b></td>
+                            <td>N/A</td>
+                            <td>1-5</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>14</td>
+                            <td>Vacuum/Dust Bedroom</td>
+                            <td>Autofilled</td>
+                            <td>2</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>15</td>
+                            <td>Deep Clean Toilet</td>
+                            <td>Autofilled</td>
+                            <td>4</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>16</td>
+                            <td>Sweep/Mop Living Areas</td>
+                            <td>Autofilled</td>
+                            <td>3</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>17</td>
+                            <td>Clean Out Car</td>
+                            <td>Autofilled</td>
+                            <td>5</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="autofill-task">
+                            <td>18</td>
+                            <td>Vacuum Furniture</td>
+                            <td>Autofilled</td>
+                            <td>3</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        <tr class="autofill-task">
+                            <td>19</td>
+                            <td>Wipe Down Kitchen Surfaces</td>
+                            <td>Autofilled</td>
+                            <td>3</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr><tr class="showAlways" id="item-19">
+                            <td>20</td>
+                            <td>Chore Of Choice!</td>
+                            <td>N/A</td>
+                            <td>1-5</td>
+                            <td><input class='mark-out' type="checkbox" value=""></td>
+                        </tr> -->
+                    <!-- </table>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<script src="script.js"></script>
+<!-- <script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script> -->
+</body>
+</html>
